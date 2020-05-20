@@ -33,7 +33,7 @@ struct DirectoryInfo
     HANDLE hDir = nullptr;
     HANDLE hCompPort = nullptr;
     HANDLE hThread = nullptr;
-    Callback callback = [](const std::wstring &, FileAction) {};
+    Callback callback;
 
     char lpBuffer[MAX_BUFFER];
     DWORD dwBufLength;
@@ -74,7 +74,8 @@ void WINAPI HandleDirectoryChange(PVOID dwCompletionPort)
                     break;
                 }
 
-                di->callback(std::wstring(fni->FileName, fni->FileNameLength / 2), fileAction);
+                if (di->callback)
+                    di->callback(std::wstring(fni->FileName, fni->FileNameLength / 2), fileAction);
 
                 cbOffset = fni->NextEntryOffset;
                 fni = (PFILE_NOTIFY_INFORMATION)((LPBYTE)fni + cbOffset);
