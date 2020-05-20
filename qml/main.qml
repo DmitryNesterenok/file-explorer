@@ -89,7 +89,8 @@ Window {
 
         onAccepted: {
             fileView.currentIndex = -1
-            worker.rename(oldName, renameTextEdit.text)
+            if (!worker.rename(oldName, renameTextEdit.text))
+                console.log("Rename from \'%1\' to \'%2\' is failed".arg(oldName).arg(renameTextEdit.text))
         }
     }
 }

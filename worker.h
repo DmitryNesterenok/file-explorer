@@ -20,7 +20,7 @@ public:
 
     Q_INVOKABLE void enterToDirectory(const QString &dirName);
     Q_INVOKABLE void upDirectory();
-    Q_INVOKABLE void rename(const QString &oldName, const QString &newName);
+    Q_INVOKABLE bool rename(const QString &oldName, const QString &newName);
 
     FilesModel *filesModel() const;
     QString currentPath() const;

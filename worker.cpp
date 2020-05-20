@@ -44,9 +44,9 @@ void Worker::upDirectory()
         emit currentPathChanged(currentPath());
 }
 
-void Worker::rename(const QString &oldName, const QString &newName)
+bool Worker::rename(const QString &oldName, const QString &newName)
 {
-    m_currentDir.rename(oldName, newName);
+    return m_currentDir.rename(oldName, newName);
 }
 
 FilesModel *Worker::filesModel() const
