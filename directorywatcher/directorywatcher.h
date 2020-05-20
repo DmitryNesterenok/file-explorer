@@ -3,6 +3,7 @@
 
 #include "directorywatcherhelper.h"
 
+#include <memory>
 #include <string>
 
 class DirectoryWatcherPrivate;
@@ -18,7 +19,7 @@ public:
     void setCallBack(const Callback &callback);
 
 private:
-    DirectoryWatcherPrivate *d_ptr = nullptr;
+    std::unique_ptr<DirectoryWatcherPrivate> d_ptr;
 };
 
 #endif // DIRECTORYWATCHER_H

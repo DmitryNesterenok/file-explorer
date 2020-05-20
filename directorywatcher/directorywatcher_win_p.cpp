@@ -90,13 +90,12 @@ void WINAPI HandleDirectoryChange(PVOID dwCompletionPort)
 
 WindowsDirectoryWatcherPrivate::WindowsDirectoryWatcherPrivate() : DirectoryWatcherPrivate()
 {
-    directoryInfo = new DirectoryInfo();
+    directoryInfo = std::make_unique<DirectoryInfo>();
 }
 
 WindowsDirectoryWatcherPrivate::~WindowsDirectoryWatcherPrivate()
 {
-    if (directoryInfo)
-        delete directoryInfo;
+    clearPath();
 }
 
 bool WindowsDirectoryWatcherPrivate::setPath(const std::wstring directory)
@@ -113,7 +112,7 @@ bool WindowsDirectoryWatcherPrivate::setPath(const std::wstring directory)
 
     // Set up a key(directory info)
     directoryInfo->hCompPort = CreateIoCompletionPort(directoryInfo->hDir, directoryInfo->hCompPort,
-                                                      (ULONG_PTR)directoryInfo, 0);
+                                                      (ULONG_PTR)directoryInfo.get(), 0);
     if (directoryInfo->hCompPort == INVALID_HANDLE_VALUE)
         return false;
 

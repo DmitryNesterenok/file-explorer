@@ -3,6 +3,7 @@
 
 #include "directorywatcher_p.h"
 
+#include <memory>
 #include <string>
 
 class DirectoryInfo;
@@ -17,7 +18,7 @@ public:
 
     void setCallBack(const Callback &callback) override;
 
-    DirectoryInfo *directoryInfo = nullptr;
+    std::unique_ptr<DirectoryInfo> directoryInfo;
 };
 
 #endif // WINDOWSDIRECTORYWATCHERPRIVATE_H

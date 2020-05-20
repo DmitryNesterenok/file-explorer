@@ -4,13 +4,11 @@
 
 DirectoryWatcher::DirectoryWatcher()
 {
-    d_ptr = new WindowsDirectoryWatcherPrivate();
+    d_ptr = std::make_unique<WindowsDirectoryWatcherPrivate>();
 }
 
 DirectoryWatcher::~DirectoryWatcher()
-{
-    d_ptr->clearPath();
-}
+{}
 
 bool DirectoryWatcher::setPath(const std::wstring directory)
 {

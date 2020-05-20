@@ -1,11 +1,14 @@
 #ifndef WORKER_H
 #define WORKER_H
 
+#include "directorywatcher/directorywatcher.h"
+
 #include <QDir>
 #include <QObject>
 
+#include <memory>
+
 class FilesModel;
-class DirectoryWatcher;
 
 class Worker : public QObject
 {
@@ -27,7 +30,7 @@ signals:
 
 private:
     FilesModel *m_filesModel = nullptr;
-    DirectoryWatcher *m_directoryWatcher = nullptr;
+    std::unique_ptr<DirectoryWatcher> m_directoryWatcher;
     QDir m_currentDir;
 };
 

@@ -1,6 +1,5 @@
 #include "worker.h"
 
-#include "directorywatcher/directorywatcher.h"
 #include "filesmodel.h"
 
 #include <QDir>
